@@ -34,7 +34,7 @@ export function DashNav({showSideBar,setShowSideBar}) {
 
 
   return (
-    <nav className="w-full h-[40px] bg-[#1f272d] flex items-center justify-between overflow-hidden">
+    <nav className="w-full h-[40px] bg-[#1f272d] flex items-center justify-between">
       <div className="p-2 flex items-center justify-center  gap-5">
         <button onClick={handleSidebar} style={{ transform: `rotate(${showSideBar ? 180 : 0}deg)`, transition: "transform 0.3s ease", }} className="cursor-pointer text-white"> <PanelLeftOpen size={18}></PanelLeftOpen> </button>
         <Logo size="20px"></Logo>

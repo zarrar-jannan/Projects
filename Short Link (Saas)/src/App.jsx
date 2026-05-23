@@ -3,44 +3,56 @@ import { useDispatch } from "react-redux";
 import { Outlet } from "react-router";
 import { AuthService } from "./Appwrite/auth/auth";
 import { login, logout } from "./store/authSlice";
-import { Loading } from "./components/layouts/Loading/Loading";
+import { MainLoading } from "./components/layouts/Loading/MainLoading";
 import { useMemo } from "react";
+import { DatabaseService } from "./Appwrite/config/databaseService/database";
 
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const database = useMemo(() => new DatabaseService(), [])
   const authentication = useMemo(() => new AuthService(), [])
 
   useEffect(() => {
 
     const startTime = Date.now()
 
-    async function fetchUser () {
+    async function fetchUser() {
       try {
-        const userInfo = await authentication.getUserData();
+        const authInfo = await authentication.getUserData();
+
+        if (!authInfo) return
+
+        const userInfo = await database.getUser({ userId: authInfo.$id })
 
         if (userInfo) {
+
           dispatch(
             login({
               $id: userInfo.$id,
-              name: userInfo.name,
+              name: userInfo.full_name,
+              bio: userInfo.bio,
               email: userInfo.email,
-              emailVerification: userInfo.emailVerification,
-              prefs: userInfo.prefs,
+              location: userInfo.location,
+              avatar_file_id: userInfo.avatar_file_id,
+              plan: userInfo.plan,
+              is_verified: userInfo.is_verified,
+              role: userInfo.role,
+              total_links: userInfo.total_links,
             }),
           );
         } else {
           dispatch(logout());
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error)
       } finally {
         const time = Date.now() - startTime
-        const remaining = Math.max(1000 - time,0);
+        const remaining = Math.max(1000 - time, 0);
 
-        setTimeout(()=>{
+        setTimeout(() => {
           setLoading(false)
-        },remaining)
+        }, remaining)
       }
     };
     fetchUser()
@@ -51,7 +63,7 @@ function App() {
   return (
     <div>
       {
-        loading ? <Loading></Loading> : <Outlet></Outlet>
+        loading ? <MainLoading></MainLoading> : <Outlet></Outlet>
       }
     </div>
   );

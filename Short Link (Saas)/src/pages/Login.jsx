@@ -3,6 +3,7 @@ import { Input } from "../components/common/Input/Input"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { AuthService } from "../Appwrite/auth/auth"
+import { DatabaseService } from "../Appwrite/config/databaseService/database"
 import { Button } from "../components/common/Button/Button"
 import { login } from '../store/authSlice'
 
@@ -19,6 +20,7 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const authentication = new AuthService()
+  const database = new DatabaseService()
   const [loading, setLoading] = useState(false)
 
 
@@ -53,17 +55,23 @@ function Login() {
       const session = await authentication.loginUser(formData);
 
       if (session) {
-        const userInfo = await authentication.getUserData()
-        console.log('userinffoooo', userInfo);
-        if (userInfo) {
+        const authInfo = await authentication.getUserData()
+
+        if (authInfo) {
+          const userInfo = await database.getUser({ userId: authInfo.$id });
 
           dispatch(login({
             $id: userInfo.$id,
+            name: userInfo.full_name,
+            bio: userInfo.bio,
             email: userInfo.email,
-            name: userInfo.name,
-            emailVerification: userInfo.emailVerification,
-            prefs: userInfo.prefs,
-          }))
+            location: userInfo.location,
+            avatar_file_id: userInfo.avatar_file_id,
+            plan: userInfo.plan,
+            is_verified: userInfo.is_verified,
+            role: userInfo.role,
+            total_links: userInfo.total_links,
+          }));
           navigate('/')
         }
       }

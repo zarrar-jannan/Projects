@@ -46,6 +46,8 @@ export function SignUp() {
 
     setLoading(true)
 
+    
+
     try {
       const session = await authentication.createAccount(formData);
 
@@ -71,11 +73,15 @@ export function SignUp() {
 
     } catch (error) {
 
+      
       setLoading(false)
 
       switch (error.code) {
         case 401:
           setError('Invalid credentials.')
+          break;
+        case 400:
+          setError('Email is already used.')
           break;
         case 409:
           setError('Account already exists.')

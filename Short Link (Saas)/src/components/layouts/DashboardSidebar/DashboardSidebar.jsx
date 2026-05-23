@@ -8,6 +8,7 @@ import { BookLock } from "lucide-react";
 import { CircleStar } from "lucide-react";
 import { Settings } from "lucide-react";
 import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 
 
 export function DashboardSidebar({ showSideBar, setShowSideBar }) {
@@ -22,7 +23,7 @@ export function DashboardSidebar({ showSideBar, setShowSideBar }) {
     { name: 'Media', icon: CircleStar, id: '#tu4fj3j', slug: '/media' },
   ]
 
-
+  const navigate = useNavigate()
 
 
 
@@ -55,7 +56,7 @@ export function DashboardSidebar({ showSideBar, setShowSideBar }) {
         </ul>
 
         <div>
-          <button className="group m-auto w-[90%] flex items-center gap-3 px-4 py-3 rounded-lg border border-[#343c42] bg-[#252d33] text-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#2f3940] hover:border-[#46515a] hover:shadow-md active:scale-[0.98]">
+          <button onClick={() => navigate('/settings')} className="group m-auto w-[90%] flex items-center gap-3 px-4 py-3 rounded-lg border border-[#343c42] bg-[#252d33] text-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#2f3940] hover:border-[#46515a] hover:shadow-md active:scale-[0.98]">
             <Settings size={20} className="text-gray-300 shrink-0  transition-transform duration-500 ease-in-out group-hover:rotate-180" />
 
             <span className={`font-[Inter] text-sm font-medium whitespace-nowrap overflow-hidden transition-all duration-300 ${showSideBar ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}`}>

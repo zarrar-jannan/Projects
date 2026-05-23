@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export function Loading() {
+export function MainLoading() {
 
 
   return (

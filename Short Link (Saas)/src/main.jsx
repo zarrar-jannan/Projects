@@ -7,14 +7,17 @@ import MainLayout from './RouteLayouts/MainLayout.jsx'
 import Login from './pages/Login.jsx'
 import { SignUp } from './pages/SignUp.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
-import {UpdatePassword} from './pages/UpdatePassword.jsx'
-import { Provider} from 'react-redux'
+import { UpdatePassword } from './pages/UpdatePassword.jsx'
+import { Provider } from 'react-redux'
 import { store } from './store/store.js'
 import { NotFound } from './pages/NotFound.jsx'
 import { Landing } from './pages/Landing.jsx'
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect.jsx'
 import { DashLayout } from './RouteLayouts/DashLayout.jsx'
 import { Home } from './pages/Home.jsx'
+import SettingsLayout from './RouteLayouts/SettingsLayout.jsx'
+import { ProfileSettings } from './pages/Settings/ProfileSettings.jsx'
+import { AccountSettings } from './pages/Settings/AccountSettings.jsx'
 
 
 const router = createBrowserRouter([
@@ -31,8 +34,23 @@ const router = createBrowserRouter([
       {
         element: <DashLayout></DashLayout>,
         children: [
-          {path: '/home',element: <Home></Home> }
-        ]
+          { path: '/home', element: <Home></Home> },
+          {
+            element: <SettingsLayout></SettingsLayout>,
+            children: [
+              {
+                path: '/settings',
+                children: [
+                    // {index: true,element: <ProfileSettings></ProfileSettings>},
+                    {path: 'profile',element: <ProfileSettings/>},
+                    {path: 'account',element: <AccountSettings/> },
+                    {path: 'notifications',element: 'NOTIFICATIONS'},
+                    {path: 'plans',element: 'PLANS'},
+                ]
+              }
+            ]
+          },
+        ],
       },
       {
         children: [
