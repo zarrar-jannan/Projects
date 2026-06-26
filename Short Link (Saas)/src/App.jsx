@@ -48,7 +48,7 @@ function App() {
         console.error(error)
       } finally {
         const time = Date.now() - startTime
-        const remaining = Math.max(1000 - time, 0);
+        const remaining = Math.max(10 - time, 0);
 
         setTimeout(() => {
           setLoading(false)

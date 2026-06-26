@@ -18,8 +18,8 @@ export class AuthService {
 
   async createAccount({ username, email, password }) {
     try {
-      const res = await fetch("https://geo.kamero.ai/api/geo");
-      const IpData = await res.json();
+      // const res = await fetch("https://geo.kamero.ai/api/geo");
+      // const IpData = await res.json();
 
       const userId = ID.unique();
 
@@ -35,7 +35,7 @@ export class AuthService {
         userId: userId,
         full_name: username,
         email,
-        location: IpData.city,
+        // location: IpData.city,
         avatar_file_id: null,
         plan: "free",
         role: "user",
