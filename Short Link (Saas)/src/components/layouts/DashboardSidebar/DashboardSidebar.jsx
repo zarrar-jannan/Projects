@@ -28,7 +28,7 @@ export function DashboardSidebar({ showSideBar, setShowSideBar }) {
 
 
   return (
-    <div className={`h-[calc(100vh-40px)] ${showSideBar ? 'w-full sm:w-[200px]' : 'w-0 sm:w-auto sm:p-2'} absolute left-0 sm:relative custom-scrollbar overflow-y-auto flex gap-8 flex-col justify-start items-center bg-[#1f272d]   transition-all duration-300 ease-in-out `}>
+    <div className={`h-[calc(100vh-40px)] ${showSideBar ? 'w-full sm:w-[200px]' : 'w-0 sm:w-auto sm:p-2'} absolute z-[100000000] left-0 sm:relative custom-scrollbar overflow-y-auto flex gap-8 flex-col justify-start items-center bg-[#1f272d]   transition-all duration-300 ease-in-out `}>
       <div>
         <button className={`mt-8 flex items-center justify-center gap-2 rounded-lg border border-[#343c42] bg-[#2a3339] px-4 py-2.5  cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#333d44] hover:border-[#46515a] hover:shadow-lg active:scale-95`}>
           <Plus size={20} className="text-blue-400 shrink-0" strokeWidth={2.5} />
