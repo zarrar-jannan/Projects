@@ -39,7 +39,7 @@ export function SettingSideBar({ showSettingOps, setShowSettOps, options }) {
                 ease: 'linear',
             }}
 
-            className={` absolute items-start left-0 top-0 bg-[#252126] p-4 rounded-br-[12px]`}
+            className={` absolute z-[10000000] items-start left-0 top-0 bg-[#252126] p-4 rounded-br-[12px]`}
         >
 
             <div onClick={handleClick} className="cursor-pointer group">
